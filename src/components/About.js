@@ -1,31 +1,40 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function About() {
-    const [myStyle,setStyle] = useState({
-        color:"black",
-        backgroundColor:"white"
-    });
+export default function About(Props) {
+    // const [myStyle,setStyle] = useState({
+    //     color:"black",
+    //     backgroundColor:"white"
+    // });
 
     const [buttonText,setButtonText] = useState("Enable Dark Mode");
 
-    const enableMode = () => {
-        if(myStyle.color === "black"){
-            setStyle({
-                color:"white",
-                backgroundColor:"black",
-                border: "1px solid white"
-            });
-            setButtonText("Enable Light Mode");
-        }
-        else{
-            setStyle({
-                color:"black",
-                backgroundColor:"white"
-            });
-            setButtonText("Enable Dark Mode");
-        }
+
+    let myStyle = {
+        color: Props.mode === 'dark' ? 'white':'black',
+        backgroundColor: Props.mode === 'dark' ? 'black':'white',
+        border: "1px solid",
+        borderColor: Props.mode === 'dark' ? 'white':'black'
     }
+    // const enableMode = () => {
+    //     if(myStyle.color === "black"){
+    //         setStyle({
+    //             color:"white",
+    //             backgroundColor:"black",
+    //             border: "1px solid white"
+    //         });
+    //         setButtonText("Enable Light Mode");
+    //     }
+    //     else{
+    //         setStyle({
+    //             color:"black",
+    //             backgroundColor:"white"
+    //         });
+    //         setButtonText("Enable Dark Mode");
+    //     }
+    // }
+
+
   return (
     <div classNameName="container" style={myStyle}>
         <h1 className='my-3 mx-3'>About Us</h1>
@@ -68,7 +77,7 @@ export default function About() {
         </div>
       </div>
       <div classNameName="container">
-        <button onClick={enableMode} className="btn btn-primary my-2 mx-3">{buttonText}</button>
+        <button className="btn btn-primary my-2 mx-3">{buttonText}</button>
       </div>
     </div>
   )

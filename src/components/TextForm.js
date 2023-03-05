@@ -55,7 +55,7 @@ export default function TextForm(Props) {
           Example textarea
         </label> */}
         <textarea
-        style={{backgroundColor:Props.mode === "dark"?"grey":"white",color:Props.mode === "dark"?"white":"black"}}
+        style={{backgroundColor:Props.mode === "dark"?"#45558f":"white",color:Props.mode === "dark"?"white":"black"}}
         value={text}
         onChange={handleOnChange}
           className="form-control"
@@ -64,15 +64,16 @@ export default function TextForm(Props) {
           rows="8"
         ></textarea>
       </div>
-      <button onClick={handleUpClick} className="btn btn-primary mx-1">convert to uppercase</button>
-      <button onClick={handleLoClick} className="btn btn-primary mx-1">convert to lowecase</button>
-      <button onClick={copyText} className="btn btn-primary mx-1">copy text</button>
-      <button onClick={extraSpaceRemove} className="btn btn-primary mx-1">remove extra space</button>
+      <button disabled={text.length===0} onClick={handleUpClick} className="btn btn-primary mx-1 my-1">convert to uppercase</button>
+      <button disabled={text.length===0} onClick={handleLoClick} className="btn btn-primary mx-1 my-1">convert to lowecase</button>
+      <button disabled={text.length===0} onClick={copyText} className="btn btn-primary mx-1 my-1">copy text</button>
+      <button disabled={text.length===0} onClick={extraSpaceRemove} className="btn btn-primary mx-1 my-1">remove extra space</button>
     </div>
     <div className="container my-3">
       <h1 style={{color:Props.mode === "dark"?"white":"black"}}>Your text summary</h1>
-      <p style={{color:Props.mode === "dark"?"white":"black"}}>{wordCounter(text)} words and {text.length} characters</p>
-      <p style={{color:Props.mode === "dark"?"white":"black"}}>{0.008 * wordCounter(text)} Minutes read</p>
+      {/* <p style={{color:Props.mode === "dark"?"white":"black"}}>{wordCounter(text)} words and {text.length} characters</p> */}
+      <p style={{color:Props.mode === "dark"?"white":"black"}}>{text.split(/\s+/).filter((element) => {return element.length!==0}).length} words and {text.length} characters</p>
+      <p style={{color:Props.mode === "dark"?"white":"black"}}>{0.008 * text.split(/\s+/).filter((element) => {return element.length!==0}).length} Minutes read</p>
       <h2 style={{color:Props.mode === "dark"?"white":"black"}}>Preview</h2>
       <p style={{color:Props.mode === "dark"?"white":"black"}}>{text}</p>
     </div>
